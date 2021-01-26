@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <include layout="@layout/custom_toolbar"
+        android:id="@+id/toolbar_home"/>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerView"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            app:fabSize="normal"
+            android:id="@+id/fab_btn"
+            android:src="@drawable/fab"
+            android:backgroundTint="@color/teal_200"
+            android:layout_margin="15dp" />
+
+
+
+
+
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+</LinearLayout>
