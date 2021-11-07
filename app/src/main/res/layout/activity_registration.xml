@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/login_screen_background"
     tools:context=".RegistrationActivity">
 
     <TextView
@@ -46,8 +46,7 @@
         android:id="@+id/registration"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="1"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:gravity="center_horizontal"
         android:text="Sign Up"
@@ -58,7 +57,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/password_reg_retype"
+        app:layout_constraintWidth_percent="1" />
 
     <TextView
         android:id="@+id/login_reg"
@@ -79,7 +79,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-       app:layout_constraintWidth_percent="1"
+        app:layout_constraintWidth_percent="1"
         android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:padding="5dp"
@@ -117,6 +117,29 @@
             app:layout_constraintVertical_bias="0.492" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/password_reg_retype"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="Re-enter Password"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:maxLines="1"
+        android:padding="5dp"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintWidth_percent="1" />
+
+
+
+
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -1,17 +1,14 @@
 package Model;
 
+import java.util.Map;
+
 public class Data {
     private String title;
     private String note;
-    private String date;
+    private Map<String,String> date;
     private String id;
 
-    Data()
-    {
-
-    }
-
-    public Data(String title, String note, String date, String id) {
+    public Data(String title, String note, Map<String,String> date, String id) {
         this.title = title;
         this.note = note;
         this.date = date;
@@ -34,11 +31,11 @@ public class Data {
         this.note = note;
     }
 
-    public String getDate() {
+    public Map<String,String> getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate( Map<String,String> date) {
         this.date = date;
     }
 

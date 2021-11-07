@@ -2,7 +2,6 @@ package com.purnendu.yourtask;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,31 +13,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private Button login;
     private EditText  mail_login,password_login;
-    private TextView   registration_login,forget_password;
     private ProgressDialog progressDialog;
     private FirebaseAuth mauth;
     private FirebaseUser mUser;
-    private ImageView show_pass_btn;
     boolean isPasswordVisible=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        login=findViewById(R.id.login);
+        Button login = findViewById(R.id.login);
         mail_login=findViewById(R.id.mail_login);
         password_login=findViewById(R.id.password_login);
-        registration_login=findViewById(R.id.registration_login);
-        forget_password=findViewById(R.id.forget_password);
-        show_pass_btn=findViewById(R.id.show_pass_btn);
+        TextView registration_login = findViewById(R.id.registration_login);
+        TextView forget_password = findViewById(R.id.forget_password);
+        ImageView show_pass_btn = findViewById(R.id.show_pass_btn);
         progressDialog=new ProgressDialog(this);
         mauth=FirebaseAuth.getInstance();
         forget_password.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                   mUser=mauth.getCurrentUser();
                   if(mUser!=null) {
                       if (mUser.isEmailVerified()) {
-                          Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                           Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                           startActivity(intent);
                       } else {
@@ -107,13 +102,13 @@ public class MainActivity extends AppCompatActivity {
               }
               else
               {
-                  Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(MainActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                   progressDialog.dismiss();
               }
           }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    System.out.println(e.getLocalizedMessage());
+                    Toast.makeText(MainActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
