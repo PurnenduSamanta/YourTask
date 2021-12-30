@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_reg_retype"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
         app:layout_constraintWidth_percent="1" />
 
     <TextView
@@ -110,7 +110,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:onClick="onClick"
-            android:src="@drawable/password_toggle_show"
+            android:src="@drawable/password_toggle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -118,23 +118,51 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/password_reg_retype"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="1"
         android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
-        android:hint="Re-enter Password"
-        android:inputType="textPassword"
-        android:maxLength="20"
-        android:maxLines="1"
         android:padding="5dp"
-        android:textColorHint="@color/white"
-        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintWidth_percent="1" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <EditText
+            android:id="@+id/password_reg_retype"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.9"
+            android:background="@null"
+            android:hint="Re-enter Password"
+            android:maxLength= "20"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:textColorHint="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/show_pass_btn1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:onClick="onClick"
+            android:src="@drawable/password_toggle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.492" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

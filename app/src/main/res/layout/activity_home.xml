@@ -2,51 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homeScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <include layout="@layout/custom_toolbar"
-        android:id="@+id/toolbar_home"/>
+    <include
+        android:id="@+id/toolbar_home"
+        layout="@layout/custom_toolbar" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-
         <ImageView
+            android:id="@+id/nothing_found"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/nothing_found"
             android:src="@drawable/nothing_found"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/recyclerView"/>
+            android:layout_height="match_parent" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            app:fabSize="normal"
-            android:id="@+id/fab_btn"
-            android:src="@drawable/fab"
+            android:layout_margin="15dp"
             android:backgroundTint="@color/teal_200"
-            android:layout_margin="15dp" />
-
-
-
-
-
+            android:src="@drawable/fab"
+            app:fabSize="normal" />
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
 </LinearLayout>

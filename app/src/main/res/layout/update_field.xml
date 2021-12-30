@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/background"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -16,14 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
-            android:maxLines="2"
             android:layout_margin="5dp"
             android:id="@+id/title_update"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:maxLines="4"
             android:hint="Type your Notes here"
             android:id="@+id/notes_update"/>
         <RelativeLayout

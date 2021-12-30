@@ -52,14 +52,15 @@
                         android:textColorHint="@color/white"
                         android:inputType="textPassword"
                         android:hint="Password:"/>
+
                     <ImageView
+                        android:id="@+id/show_pass_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:id="@+id/show_pass_btn"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/password_toggle_show"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/password_toggle" />
 
 
                 </RelativeLayout>

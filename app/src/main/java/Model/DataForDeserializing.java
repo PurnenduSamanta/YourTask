@@ -1,34 +1,23 @@
 package Model;
 
-import java.util.Map;
+public class DataForDeserializing {
 
-public class Data {
     private String title;
     private String note;
-    private Map<String,String> date;
     private String id;
     private String imageUrl;
 
 
-
-    public  Data()
+    public DataForDeserializing()
     {
 
     }
 
-    public Data(String title, String note, Map<String,String> date, String id,String imageUrl) {
+    public DataForDeserializing(String title, String note, String id, String imageUrl) {
         this.title = title;
         this.note = note;
-        this.date = date;
         this.id = id;
-        this.imageUrl=imageUrl;
-    }
-
-    public Data(String title, String note, Map<String,String> date, String id) {
-        this.title = title;
-        this.note = note;
-        this.date = date;
-        this.id = id;
+        this.imageUrl = imageUrl;
     }
 
     public String getTitle() {
@@ -47,14 +36,6 @@ public class Data {
         this.note = note;
     }
 
-    public Map<String,String> getDate() {
-        return date;
-    }
-
-    public void setDate( Map<String,String> date) {
-        this.date = date;
-    }
-
     public String getId() {
         return id;
     }
@@ -71,5 +52,3 @@ public class Data {
         this.imageUrl = imageUrl;
     }
 }
-
-

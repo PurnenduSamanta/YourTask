@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Your Task</string>
 
-    <string name="dialogContent">
-    All the icons used in this App are from
+    <string name="dialogContent">All the icons used in this App are from
     <a href="https://www.flaticon.com/">Flaticon</a>
         and
     <a href="https://www.freepik.com/">Freepik</a>
-        .Do write us any query in joysamanta84@gmail.com
+        . Do write us any query in joysamanta84@gmail.com
 </string>
 </resources>

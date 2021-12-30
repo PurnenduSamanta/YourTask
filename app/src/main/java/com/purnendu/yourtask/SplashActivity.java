@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         Handler handler=new Handler();
         if(mauth.getCurrentUser()!=null && (Objects.requireNonNull(mUser).isEmailVerified()))
         {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             Intent intent=new Intent(SplashActivity.this,HomeActivity.class);
             startActivity(intent);
         }

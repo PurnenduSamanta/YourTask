@@ -6,56 +6,60 @@
     app:cardElevation="5dp"
     app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true"
+    android:padding="2dp"
     android:id="@+id/cardView">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="3dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/splash_icon"
+            android:visibility="gone"
+            android:id="@+id/image"/>
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/image"
             android:text="Title"
+            android:textSize="18sp"
             android:id="@+id/title"
             android:textStyle="bold"
-            android:padding="5dp"
             android:maxLines="1"
-            android:textColor="#E91E63"
+            android:textColor="#2c3e50"
            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notes"
-            android:maxLines="2"
-            android:padding="5dp"
+            android:layout_marginTop="2dp"
+            android:textSize="12sp"
+            android:maxLines="5"
             android:id="@+id/notes"
             android:layout_below="@+id/title"
-            android:textColor="#18FFFF"
+            android:textColor="#9b59b6"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="28-Dec-2020"
+            android:layout_marginTop="2dp"
+            android:textSize="11sp"
             android:id="@+id/date"
-            android:padding="2dp"
             android:layout_below="@+id/notes"
             android:textColor="#69F0AE"
-            android:layout_alignParentRight="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:layout_alignParentEnd="true" />
-
-
-
-
-
-
     </RelativeLayout>
-
-
-
-
-
-
 
 </androidx.cardview.widget.CardView>

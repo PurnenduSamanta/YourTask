@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
 
             }
-            progressDialog.setMessage("Processing...");
+            progressDialog.setMessage("Hold on...");
             progressDialog.show();
             mauth.signInWithEmailAndPassword(memail,mpass).addOnCompleteListener(task -> {
               if(task.isSuccessful()) {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                           Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                           startActivity(intent);
                       } else {
-                          Toast.makeText(MainActivity.this, "You need to verify your mail", Toast.LENGTH_SHORT).show();
+                          Toast.makeText(MainActivity.this, "You need to verify your Email", Toast.LENGTH_SHORT).show();
                           Intent intent = new Intent(MainActivity.this, EmailVerificationActivity.class);
                           startActivity(intent);
                       }
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
           }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
                     Toast.makeText(MainActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
