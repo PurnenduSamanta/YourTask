@@ -57,6 +57,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -77,6 +78,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -164,7 +166,6 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
         String uID = mUser.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("TaskNotes").child(uID);
         mDatabase.keepSynced(true);
-
 
         //Floating action button for creating task
         fab_btn.setOnClickListener(v -> {
@@ -263,14 +264,35 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
                     }
 
                     //Uploading in FirebaseStorage
-                    final StorageReference reference = storageReference.child("images/" + mUser.getEmail() + "/" + pickedImageUri.getLastPathSegment());
+                    String phNo=mUser.getPhoneNumber();
+                    String email=mUser.getEmail();
+                    String providerName=(mUser.getProviderData()).get(1).getProviderId();
+
+                    StorageReference reference = null;
+                    if(email!=null && providerName.equals("password"))
+                    {
+                        reference = storageReference.child("images/" + email + "/" + pickedImageUri.getLastPathSegment());
+                    }
+
+                    if(email!=null && providerName.equals("google.com"))
+                    {
+                        reference = storageReference.child("images/" + email + "/" + pickedImageUri.getLastPathSegment());
+                    }
+
+                    if(phNo!=null && providerName.equals("phone"))
+                    {
+                        reference = storageReference.child("images/" + phNo + "/" + pickedImageUri.getLastPathSegment());
+                    }
+                    if(reference==null)
+                        return;
                     progressDialog.show();
 
                     uploadTask = reference.putFile(pickedImageUri);
+                    StorageReference finalReference = reference;
                     uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            finalReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     String id = mDatabase.push().getKey();
@@ -501,7 +523,6 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
                 return new ViewHolder(view);
             }
         };
-
         recyclerView.setAdapter(adapter);
     }
 
@@ -533,7 +554,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
         if (item.getItemId() == R.id.menu) {
             mAuth.signOut();
             workManager.cancelWorkById(workRequest.getId());
-            Intent intent = new Intent(HomeActivity.this, RegistrationActivity.class);
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
             finish();
             startActivity(intent);
             return true;
@@ -616,13 +637,6 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
                     }
                 });
         snackbar.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        finishAffinity();
-        System.exit(0);
-        super.onBackPressed();
     }
 
     public void broadcastIntent() {

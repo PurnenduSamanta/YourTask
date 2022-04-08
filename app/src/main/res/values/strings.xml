@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Your Task</string>
 
+    <string name="your_web_client_id">440666790619-psb4o7mmarcdc8q31rlm7ve8qk20ssu7.apps.googleusercontent.com</string>
+
     <string name="dialogContent">All the icons used in this App are from
     <a href="https://www.flaticon.com/">Flaticon</a>
         and

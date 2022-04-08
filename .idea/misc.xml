@@ -3,6 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable-hdpi/login_activity_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/edit_text_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/login_screen_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/otp_verification_country_code_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/otp_verification_edit_text_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/single_otp_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/drawable/toolbar_background.xml" value="0.1" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout-v21/activity_email_verification.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_email_verification.xml" value="0.22" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_forget_password.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_login.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_login_with_otpactivity.xml" value="0.22" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_otp_verification.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_registration.xml" value="0.1796875" />
+        <entry key="..\:/Androidproject/Your Task/app/src/main/res/layout/activity_splash.xml" value="0.1796875" />
         <entry key="..\:/Androidproject/YourTask/app/src/main/res/drawable-anydpi/logout.xml" value="0.2703125" />
         <entry key="..\:/Androidproject/YourTask/app/src/main/res/drawable/background.xml" value="0.22777777777777777" />
         <entry key="..\:/Androidproject/YourTask/app/src/main/res/drawable/edit_text_background.xml" value="0.22777777777777777" />
@@ -27,7 +45,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="14" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

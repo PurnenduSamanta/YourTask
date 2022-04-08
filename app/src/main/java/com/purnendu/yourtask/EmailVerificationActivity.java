@@ -3,7 +3,6 @@ package com.purnendu.yourtask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +12,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Objects;
 
 public class EmailVerificationActivity extends AppCompatActivity {
@@ -23,6 +23,7 @@ public class EmailVerificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_verification);
         Button verification_button = findViewById(R.id.verification_button);
+
         mAuth=FirebaseAuth.getInstance();
         verification_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,14 +38,10 @@ public class EmailVerificationActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 Toast.makeText(EmailVerificationActivity.this, "Please verify your email sent to "+mUser.getEmail()+",then log into account", Toast.LENGTH_LONG).show();
-                                try {
-                                    Intent intent = new Intent("android.intent.action.MAIN");
-                                    intent.addCategory("android.intent.category.APP_EMAIL");
-                                    startActivity(Intent.createChooser(intent, "Verify Your Email"));
-                                }catch (ActivityNotFoundException e)
-                                {
-                                    Toast.makeText(EmailVerificationActivity.this, "Email Client not found", Toast.LENGTH_LONG).show();
-                                }
+
+                                Intent intent = new Intent(EmailVerificationActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
 
                             }
                             else
@@ -65,8 +62,22 @@ public class EmailVerificationActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
+        mAuth.signOut();
         Intent intent=new Intent(EmailVerificationActivity.this,MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         super.onRestart();
+    }
+
+    @Override
+    protected void onDestroy() {
+         mAuth.signOut();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        mAuth.signOut();
+        super.onStop();
     }
 }

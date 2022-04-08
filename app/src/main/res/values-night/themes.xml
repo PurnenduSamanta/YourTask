@@ -21,5 +21,17 @@
         <item name="cornerSizeBottomRight">20dp</item>
         <item name="cornerFamily">rounded</item>
     </style>
-    <style name="MyGravity" parent="android:Theme.Material.Dialog" ></style>
+
+    <style name="Theme.SplashScreenTheme"
+        parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="MyGravity" parent="android:Theme.Material.Dialog" />
 </resources>

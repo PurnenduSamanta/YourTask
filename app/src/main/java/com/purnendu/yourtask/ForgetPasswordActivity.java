@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
-    private EditText femail;
+    private EditText fEmail;
     private FirebaseAuth mAuth;
 
     @Override
@@ -27,17 +27,18 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
         Button reset = findViewById(R.id.reset);
-        femail=findViewById(R.id.femail);
+        fEmail =findViewById(R.id.femail);
         mAuth=FirebaseAuth.getInstance();
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String remail=femail.getText().toString().trim();
+               String remail= fEmail.getText().toString().trim();
                 if(TextUtils.isEmpty(remail))
                 {
-                    femail.setError("Required Field");
+                    fEmail.setError("Required Field");
                     return;
                 }
+                reset.setEnabled(false);
                 mAuth.sendPasswordResetEmail(remail).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
@@ -46,12 +47,15 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                         {
                             hideKeyboard(v);
                             Toast.makeText(ForgetPasswordActivity.this, "Reset email has been sent to "+remail+" email address" ,Toast.LENGTH_LONG).show();
+                            reset.setEnabled(true);
                             Intent intent=new Intent(ForgetPasswordActivity.this,MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
 
                         }
                         else
                         {
+                            reset.setEnabled(true);
                             Toast.makeText(ForgetPasswordActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

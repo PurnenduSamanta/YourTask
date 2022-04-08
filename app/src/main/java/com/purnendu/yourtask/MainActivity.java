@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         TextView forget_password = findViewById(R.id.forget_password);
         ImageView show_pass_btn = findViewById(R.id.show_pass_btn);
         progressDialog=new ProgressDialog(this);
+        progressDialog.setCancelable(false);
         mauth=FirebaseAuth.getInstance();
         forget_password.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                   if(mUser!=null) {
                       if (mUser.isEmailVerified()) {
                           Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                          intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                           startActivity(intent);
                       } else {
                           Toast.makeText(MainActivity.this, "You need to verify your Email", Toast.LENGTH_SHORT).show();
@@ -117,11 +120,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-    @Override
-    public void onBackPressed() {
-        finishAffinity();
-        System.exit(0);
-        super.onBackPressed();
     }
 }

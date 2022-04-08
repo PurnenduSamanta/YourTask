@@ -44,8 +44,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         show_pass_btn1.setOnClickListener(this);
         mAuth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(RegistrationActivity.this);
+        progressDialog.setCancelable(false);
         login_reg.setOnClickListener(v -> {
             Intent intent=new Intent(RegistrationActivity.this,MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
         registration.setOnClickListener(v -> {
@@ -87,10 +89,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 if (task.isSuccessful()) {
+                                    mAuth.signOut();
                                     progressDialog.dismiss();
                                     hideKeyboard(v);
-                                    Toast.makeText(RegistrationActivity.this, "Please verify your email sent to " + mUser.getEmail() + ",then log into account", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegistrationActivity.this, "Please verify your email sent to " + mUser.getEmail() + ",then log into account", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                 } else {
                                     progressDialog.dismiss();
@@ -110,13 +114,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         });
     }
-    @Override
-    public void onBackPressed() {
-        finishAffinity();
-        System.exit(0);
-        super.onBackPressed();
-    }
-
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.show_pass_btn || v.getId()==R.id.show_pass_btn1){

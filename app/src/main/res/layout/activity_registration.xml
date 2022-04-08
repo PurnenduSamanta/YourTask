@@ -27,7 +27,7 @@
         android:id="@+id/mail_reg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-       app:layout_constraintWidth_percent="1"
+        app:layout_constraintWidth_percent="1"
         android:layout_marginTop="20dp"
         android:background="@drawable/edit_text_background"
         android:ems="10"
