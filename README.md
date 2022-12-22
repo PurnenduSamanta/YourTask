@@ -1,7 +1,7 @@
 # YourTask
 A Note Taking App where users can log in using OTP
 verification, Google sign-in, Email password methods ,create notes with images using Firebase Realtime database and Storage and also
-can delete and update the notes
+can delete and update the notes.
 
 PlayStore link: [Link](https://play.google.com/store/apps/details?id=com.purnendu.yourtask)
 
