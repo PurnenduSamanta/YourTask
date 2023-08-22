@@ -1,8 +1,8 @@
 package com.purnendu.yourtask;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
+
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -15,10 +15,7 @@ import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,7 +27,6 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -42,10 +38,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
@@ -54,10 +48,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -67,18 +59,8 @@ import com.google.firebase.storage.OnPausedListener;
 import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.DexterError;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.PermissionRequestErrorListener;
-import com.karumi.dexter.listener.single.PermissionListener;
-
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -101,7 +83,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
     private WorkRequest workRequest;
 
     //opening gallery and selecting image
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+    /*ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -120,7 +102,25 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
 
                     }
                 }
+            });*/
+
+    ActivityResultLauncher<PickVisualMediaRequest> photoPicker = registerForActivityResult(
+            new ActivityResultContracts.PickVisualMedia(), uri -> {
+                if (uri != null) {
+                    if (createNoteDialogBox != null) {
+                        ShapeableImageView selectedImage = createNoteDialogBox.findViewById(R.id.selectedImage);
+                        selectedImage.setVisibility(View.VISIBLE);
+                        selectedImage.setImageURI(uri);
+                        pickedImageUri = uri;
+                    }
+                }
+                else {
+                    Toast.makeText(HomeActivity.this, "Image Pick cancelled", Toast.LENGTH_SHORT).show();
+                }
             });
+
+
+
 
     @SuppressLint("InflateParams")
     @Override
@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
         //Creating ProgressDialog
         progressDialog = new ProgressDialog(HomeActivity.this, R.style.MyGravity);
         progressDialog.setCancelable(false);
-        progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(progressDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
         //Initialising elements
@@ -174,7 +174,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
             createNoteDialogBox = inflater.inflate(R.layout.custom_input_field, null);
             alertDialog.setView(createNoteDialogBox);
             Dialog dialog = alertDialog.create();
-            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            Objects.requireNonNull(Objects.requireNonNull(dialog.getWindow())).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.show();
             dialog.setCancelable(false);
             EditText heading, notes;
@@ -247,7 +247,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
 
                     //Checking File size
                     Cursor returnCursor = getContentResolver().query(pickedImageUri, null, null, null, null);
-                    int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                    int sizeIndex = Objects.requireNonNull(returnCursor).getColumnIndex(OpenableColumns.SIZE);
                     returnCursor.moveToFirst();
                     double size = returnCursor.getDouble(sizeIndex);
                     double sizeMb = size / (1024 * 1024);
@@ -414,7 +414,7 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
                     View myView = inflater.inflate(R.layout.update_field, null);
                     alertDialog.setView(myView);
                     Dialog dialog = alertDialog.create();
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    Objects.requireNonNull(Objects.requireNonNull(dialog.getWindow())).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     dialog.show();
 
                     //Initialising component of dialog
@@ -586,57 +586,13 @@ public class HomeActivity extends AppCompatActivity implements NetworkChangeCall
                 public void onClick(View v) {
                     bottomSheetDialog.dismiss();
 
-                    //Permission Control
-                    Dexter.withContext(buttonSheetView.getContext())
-                            .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                            .withListener(new PermissionListener() {
-
-                                @Override
-                                public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
-                                    Intent intent = new Intent();
-                                    intent.setType("image/*");
-                                    intent.setAction(Intent.ACTION_GET_CONTENT);
-                                    someActivityResultLauncher.launch(intent);
-                                }
-
-                                @Override
-                                public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
-                                    dialog.dismiss();
-                                    showSnackBar();
-                                }
-
-                                @Override
-                                public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
-                                    permissionToken.continuePermissionRequest();
-
-                                }
-                            }).withErrorListener(new PermissionRequestErrorListener() {
-                        @Override
-                        public void onError(DexterError dexterError) {
-                            Toast.makeText(HomeActivity.this, dexterError.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }).check();
+                    photoPicker.launch(new PickVisualMediaRequest.Builder()
+                            .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
+                            .build());
                 }
             });
 
         }
-    }
-
-    //SnackBar for denying permission
-    private void showSnackBar() {
-        LinearLayout homeScreen = findViewById(R.id.homeScreen);
-        Snackbar snackbar
-                = Snackbar.make(homeScreen, "Storage permission is needed to access picture from your phone", Snackbar.LENGTH_LONG)
-                .setAction("Go to setting", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                Uri.fromParts("package", getPackageName(), null));
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                    }
-                });
-        snackbar.show();
     }
 
     public void broadcastIntent() {
